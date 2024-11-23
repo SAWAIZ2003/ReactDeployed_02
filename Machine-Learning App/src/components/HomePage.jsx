@@ -10,14 +10,14 @@ export default function HomePage(props) {
 
   async function startRecording() {
     let tempStream;
-    console.log('Start Streaming');
+    console.log('Start recording');
 
     try {
       const streamData = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: false,
       });
-      tempStream = streamData;
+      tempStream = streamData
     } catch (error) {
       console.log(error.message);
       return;
@@ -44,7 +44,8 @@ export default function HomePage(props) {
 
     mediaRecorder.current.stop();
     mediaRecorder.current.onstop = () => {
-      const audioBlob = new Blob(audioChunks, { type: mimeType });
+      const audioBlob = new Blob(audioChunks, { type: mimeType })
+         setAudioStream(audioBlob)
       setAudioChunks([]);
       setDuration(0);
     };
@@ -58,7 +59,7 @@ export default function HomePage(props) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [recordingStatus]);
+  },);
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen pb-20">
@@ -108,7 +109,9 @@ export default function HomePage(props) {
       </main>
     </div>
   );
-}
+} 
+
+
 
 
 
